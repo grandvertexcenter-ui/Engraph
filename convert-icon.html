@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENGRAPH Icon Converter</title>
+</head>
+<body>
+  <h1>ENGRAPH Icon Converter</h1>
+  <p>Click a button to download the icon in the required size.</p>
+
+<button onclick="downloadIcon(192)">Download 192 × 192</button> <button onclick="downloadIcon(512)">Download 512 × 512</button>
+
+  <script>
+    function downloadIcon(size) {
+      const image = new Image();
+
+      image.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = size;
+        canvas.height = size;
+
+        const context = canvas.getContext("2d");
+        context.drawImage(image, 0, 0, size, size);
+
+        const link = document.createElement("a");
+        link.download = `icon-${size}.png`;
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      };
+
+      image.onerror = () => {
+        alert("Logo gagal dimuat. Pastikan server Next.js berjalan.");
+      };
+
+      image.src = "http://localhost:3000/icons/icon.svg";
+    }
+  </script>
+
+</body>
+</html>
