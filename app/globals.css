@@ -1598,3 +1598,558 @@ animation-duration: 0.01ms !important;
 animation-iteration-count: 1 !important;
 }
 }
+
+/* ENGRAPH SPECIAL IDENTITY BADGES */
+
+.badge-shimmer {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+  border-radius: 9999px;
+  padding: 9px 15px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  isolation: isolate;
+  background-size: 220% 100%;
+  animation: engraph-metallic-shimmer 3s linear infinite;
+}
+
+/* GOLD: CEO EXECUTIVE */
+
+.badge-gold {
+  color: #fff3bd;
+  border: 1px solid rgba(255, 215, 100, 0.65);
+  background-image: linear-gradient(
+    110deg,
+    #543800 0%,
+    #a87812 18%,
+    #f5d878 35%,
+    #fff7d1 43%,
+    #c99520 55%,
+    #79500a 75%,
+    #e9c45c 100%
+  );
+  box-shadow:
+    0 0 12px rgba(238, 190, 67, 0.18),
+    inset 0 0 8px rgba(255, 238, 174, 0.12);
+}
+
+/* SILVER: VVIP DEVELOPMENT */
+
+.badge-silver {
+  color: #ffffff;
+  border: 1px solid rgba(230, 235, 245, 0.7);
+  background-image: linear-gradient(
+    110deg,
+    #343a46 0%,
+    #78818e 18%,
+    #e5e9f0 35%,
+    #ffffff 43%,
+    #aeb7c5 55%,
+    #535d6c 75%,
+    #dce2eb 100%
+  );
+  box-shadow:
+    0 0 14px rgba(210, 220, 240, 0.2),
+    inset 0 0 8px rgba(255, 255, 255, 0.15);
+}
+
+/* REPEATING METALLIC LIGHT */
+
+@keyframes engraph-metallic-shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: -120% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge-shimmer {
+    animation: none;
+  }
+}
+/* =========================================
+   ENGRAPH ANIMATED IDENTITY SYSTEM
+   ========================================= */
+
+.eng-identity {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 112px;
+  margin-top: 18px;
+  padding: 18px 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.025);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.eng-identity::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(
+    110deg,
+    transparent 15%,
+    rgba(255, 255, 255, 0.045) 48%,
+    transparent 78%
+  );
+  background-size: 220% 100%;
+  animation: eng-identity-shimmer 7s linear infinite;
+}
+
+.eng-identity-copy {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.eng-identity-overline {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  opacity: 0.65;
+}
+
+.eng-identity-title {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.eng-identity-description {
+  font-size: 11px;
+  line-height: 1.6;
+  opacity: 0.7;
+}
+
+.eng-identity-status {
+  position: relative;
+  z-index: 2;
+  margin-left: auto;
+  flex-shrink: 0;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 6px 9px;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  opacity: 0.8;
+}
+
+/* AEROSPACE */
+
+.eng-identity-aerospace {
+  color: #8bdcff;
+  border-color: rgba(63, 190, 255, 0.25);
+  background:
+    radial-gradient(
+      ellipse at 12% 50%,
+      rgba(14, 165, 233, 0.12),
+      transparent 55%
+    ),
+    rgba(255, 255, 255, 0.018);
+}
+
+.eng-aircraft {
+  position: relative;
+  z-index: 2;
+  width: 88px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.24));
+}
+
+.eng-aircraft svg {
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+
+.eng-aircraft-motion {
+  transform-origin: center;
+  animation: eng-aircraft-flight 3.4s ease-in-out infinite;
+}
+
+/* CEO EXECUTIVE */
+
+.eng-identity-ceo {
+  color: #f1d58a;
+  border-color: rgba(234, 179, 55, 0.32);
+  background:
+    radial-gradient(
+      ellipse at 12% 50%,
+      rgba(202, 153, 44, 0.15),
+      transparent 52%
+    ),
+    rgba(255, 255, 255, 0.018);
+  box-shadow: inset 0 0 28px rgba(234, 179, 55, 0.025);
+}
+
+.eng-lion {
+  position: relative;
+  width: 76px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 8px rgba(234, 179, 55, 0.15));
+  animation: eng-lion-float 5s ease-in-out infinite;
+}
+
+.eng-lion svg {
+  display: block;
+  width: 100%;
+}
+
+.eng-lion-glint {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 244, 190, 0.65) 49%,
+    transparent 60%
+  );
+  background-size: 250% 100%;
+  animation: eng-lion-glint 5s ease-in-out infinite;
+  mix-blend-mode: screen;
+}
+
+/* VVIP DEVELOPMENT */
+
+.eng-identity-vvip {
+  color: #e1e8f2;
+  border-color: rgba(218, 228, 242, 0.3);
+  background:
+    radial-gradient(
+      ellipse at 92% 50%,
+      rgba(213, 224, 239, 0.12),
+      transparent 55%
+    ),
+    linear-gradient(
+      120deg,
+      rgba(150, 163, 181, 0.065),
+      rgba(255, 255, 255, 0.015)
+    );
+  box-shadow:
+    inset 0 0 25px rgba(255, 255, 255, 0.025),
+    0 0 22px rgba(200, 215, 235, 0.035);
+}
+
+.eng-vvip-ornament {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  right: 36px;
+  width: 150px;
+  pointer-events: none;
+  opacity: 0.15;
+  transform: translateY(-50%);
+  animation: eng-vvip-rotate 36s linear infinite;
+}
+
+.eng-vvip-ornament svg {
+  display: block;
+  width: 100%;
+}
+
+/* COMBINED CEO + VVIP */
+
+.eng-identity-ceo.eng-identity-vvip {
+  border-color: rgba(218, 228, 242, 0.35);
+  background:
+    radial-gradient(
+      ellipse at 10% 50%,
+      rgba(202, 153, 44, 0.13),
+      transparent 43%
+    ),
+    radial-gradient(
+      ellipse at 95% 50%,
+      rgba(213, 224, 239, 0.1),
+      transparent 50%
+    ),
+    rgba(255, 255, 255, 0.02);
+}
+
+/* MOTION */
+
+@keyframes eng-identity-shimmer {
+  0% {
+    background-position: 130% 50%;
+  }
+
+  100% {
+    background-position: -130% 50%;
+  }
+}
+
+@keyframes eng-aircraft-flight {
+  0%, 100% {
+    transform: translateY(4px) rotate(-2deg);
+  }
+
+  50% {
+    transform: translateY(-5px) rotate(2deg);
+  }
+}
+
+@keyframes eng-lion-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes eng-lion-glint {
+  0%, 15% {
+    background-position: 150% 50%;
+    opacity: 0;
+  }
+
+  35% {
+    opacity: 0.65;
+  }
+
+  60%, 100% {
+    background-position: -150% 50%;
+    opacity: 0;
+  }
+}
+
+@keyframes eng-vvip-rotate {
+  from {
+    transform: translateY(-50%) rotate(0deg);
+  }
+
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 520px) {
+  .eng-identity {
+    gap: 11px;
+    padding: 14px;
+  }
+
+  .eng-aircraft {
+    width: 60px;
+  }
+
+  .eng-lion {
+    width: 55px;
+  }
+
+  .eng-identity-status {
+    display: none;
+  }
+
+  .eng-vvip-ornament {
+    right: 8px;
+    width: 110px;
+  }
+
+  .eng-identity-title {
+    font-size: 11px;
+  }
+
+  .eng-identity-description {
+    font-size: 10px;
+  }
+}
+
+/* ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+  .eng-identity::before,
+  .eng-aircraft-motion,
+  .eng-lion,
+  .eng-lion-glint,
+  .eng-vvip-ornament {
+    animation: none !important;
+  }
+}
+/* ENGRAPH — VVIP DEVELOPMENT BADGE */
+
+.badge-shimmer {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  padding: 9px 15px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  background-size: 220% 100%;
+  animation: engraph-metallic-shimmer 4s ease-in-out infinite;
+}
+
+.badge-silver {
+  color: #ffffff;
+  background: linear-gradient(
+    110deg,
+    #34383f 0%,
+    #777e88 18%,
+    #f5f7fa 35%,
+    #9299a4 50%,
+    #e7eaf0 65%,
+    #444a54 82%,
+    #34383f 100%
+  );
+  background-size: 250% 100%;
+  box-shadow:
+    0 0 14px rgba(210, 220, 235, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.badge-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    110deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.5) 48%,
+    transparent 65%
+  );
+  transform: translateX(-120%);
+  animation: engraph-badge-glint 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes engraph-metallic-shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: -150% 50%;
+  }
+}
+
+@keyframes engraph-badge-glint {
+  0%,
+  35% {
+    transform: translateX(-120%);
+  }
+
+  75%,
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge-shimmer,
+  .badge-shimmer::after {
+    animation: none;
+  }
+}
+/* ENGRAPH CEO GEOMETRIC LION */
+
+.ceo-identity {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+  padding: 18px;
+  border: 1px solid rgba(214, 168, 79, 0.22);
+  border-radius: 16px;
+  background:
+    radial-gradient(
+      circle at 20% 50%,
+      rgba(214, 168, 79, 0.12),
+      transparent 65%
+    ),
+    rgba(255, 255, 255, 0.025);
+}
+
+.ceo-lion-frame {
+  display: grid;
+  width: 82px;
+  height: 82px;
+  flex-shrink: 0;
+  place-items: center;
+  border: 1px solid rgba(214, 168, 79, 0.3);
+  border-radius: 50%;
+  background: rgba(214, 168, 79, 0.045);
+  box-shadow: 0 0 25px rgba(214, 168, 79, 0.07);
+}
+
+.ceo-lion-icon {
+  width: 68px;
+  height: 68px;
+  filter: drop-shadow(0 0 5px rgba(214, 168, 79, 0.22));
+  animation: ceo-lion-glow 4s ease-in-out infinite;
+}
+
+.ceo-identity-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.ceo-identity-eyebrow {
+  color: #b8a477;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+.badge-gold {
+  color: #fff3c4;
+  border: 1px solid rgba(255, 215, 130, 0.35);
+  background: linear-gradient(
+    110deg,
+    #4a3514,
+    #b58a38,
+    #f3d88b,
+    #8a6728,
+    #4a3514
+  );
+  background-size: 250% 100%;
+  box-shadow: 0 0 14px rgba(214, 168, 79, 0.1);
+}
+
+@keyframes ceo-lion-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 3px rgba(214, 168, 79, 0.15));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 9px rgba(255, 215, 130, 0.45));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ceo-lion-icon {
+    animation: none;
+  }
+}

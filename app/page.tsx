@@ -13,6 +13,7 @@ type ValuationStatus =
 
 type Project = {
   id: number;
+  user_id?: string;
   title: string;
   author: string;
   sector: string;
@@ -36,6 +37,7 @@ const sectors = [
   { name: "Civil Engineering", count: 650 },
   { name: "Electrical Engineering", count: 580 },
   { name: "Software Engineering", count: 510 },
+  { name: "CEO Executive", count: 1 },
 ];
 
 const initialProjects: Project[] = [
@@ -77,13 +79,213 @@ const initialProjects: Project[] = [
   },
 ];
 
-function formatUSD(value: number) {
+function EngineeringIdentity({
+  sector,
+  isVVIP,
+}: {
+  sector: string;
+  isVVIP: boolean;
+}) {
+  const isCEO = sector === "CEO Executive";
+  const isAerospace = sector === "Aerospace Engineering";
+
+  if (!isCEO && !isAerospace && !isVVIP) {
+    return null;
+  }
+
+  return (
+    <div
+      className={[
+        "eng-identity",
+        isAerospace ? "eng-identity-aerospace" : "",
+        isCEO ? "eng-identity-ceo" : "",
+        isVVIP ? "eng-identity-vvip" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
+      {/* AEROSPACE IDENTITY */}
+      {isAerospace && (
+        <div
+          className="eng-aircraft"
+          aria-label="Aerospace Engineering animated aircraft"
+        >
+          <svg
+            viewBox="0 0 120 70"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M8 48 L112 48"
+              stroke="currentColor"
+              strokeWidth="1"
+              strokeDasharray="3 6"
+              opacity=".35"
+            />
+
+            <g className="eng-aircraft-motion">
+              <path
+                d="M15 37 L49 33 L72 10 L82 10 L72 32 L103 35 L113 41 L72 43 L62 58 L54 58 L55 43 L25 44 Z"
+                fill="currentColor"
+                fillOpacity=".14"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinejoin="round"
+              />
+
+              <path
+                d="M25 40 L97 39"
+                stroke="currentColor"
+                strokeWidth="1"
+                opacity=".55"
+              />
+            </g>
+
+            <circle
+              cx="20"
+              cy="53"
+              r="2"
+              fill="currentColor"
+              opacity=".6"
+            />
+
+            <circle
+              cx="31"
+              cy="53"
+              r="1.5"
+              fill="currentColor"
+              opacity=".4"
+            />
+          </svg>
+        </div>
+      )}
+
+      {/* CEO GEOMETRIC LION */}
+      {isCEO && (
+        <div
+          className="eng-lion"
+          aria-label="CEO Executive geometric lion emblem"
+        >
+          <svg
+            viewBox="0 0 120 120"
+            fill="none"
+            aria-hidden="true"
+          >
+            <defs>
+              <linearGradient
+                id="engLionGold"
+                x1="15"
+                y1="10"
+                x2="105"
+                y2="110"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop stopColor="#FFF2B0" />
+                <stop offset=".45" stopColor="#D6A63B" />
+                <stop offset="1" stopColor="#805A13" />
+              </linearGradient>
+            </defs>
+
+            <g
+              stroke="url(#engLionGold)"
+              strokeWidth="1.5"
+              strokeLinejoin="round"
+            >
+              <path d="M60 8 L88 17 L108 43 L101 77 L82 103 L60 113 L38 103 L19 77 L12 43 L32 17 Z" />
+              <path d="M32 17 L43 44 L60 34 L77 44 L88 17" />
+              <path d="M19 77 L43 70 L60 83 L77 70 L101 77" />
+              <path d="M43 44 L35 61 L43 70 L60 65 L77 70 L85 61 L77 44" />
+              <path d="M43 70 L48 88 L60 98 L72 88 L77 70" />
+              <path d="M35 61 L49 55 L60 65 L71 55 L85 61" />
+              <path d="M48 88 L60 83 L72 88" />
+              <path d="M49 55 L51 72 L60 83 L69 72 L71 55" />
+            </g>
+
+            <path
+              d="M45 49 L53 46 M67 46 L75 49"
+              stroke="#FFF2B0"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+
+            <path
+              d="M56 70 L60 73 L64 70"
+              stroke="#FFF2B0"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+            />
+
+            <circle
+              cx="60"
+              cy="60"
+              r="52"
+              stroke="url(#engLionGold)"
+              strokeWidth=".6"
+              strokeDasharray="2 7"
+              opacity=".55"
+            />
+          </svg>
+
+          <span className="eng-lion-glint" />
+        </div>
+      )}
+
+      {/* VVIP GEOMETRIC ORNAMENT */}
+      {isVVIP && (
+        <div className="eng-vvip-ornament" aria-hidden="true">
+          <svg viewBox="0 0 180 180" fill="none">
+            <g
+              stroke="currentColor"
+              strokeWidth=".8"
+              opacity=".75"
+            >
+              <path d="M90 8 L172 55 L172 125 L90 172 L8 125 L8 55 Z" />
+              <path d="M90 27 L155 64 L155 116 L90 153 L25 116 L25 64 Z" />
+              <path d="M90 8 L90 172 M8 55 L172 125 M172 55 L8 125" />
+              <circle cx="90" cy="90" r="43" />
+              <circle cx="90" cy="90" r="28" />
+            </g>
+          </svg>
+        </div>
+      )}
+
+      <div className="eng-identity-copy">
+        <span className="eng-identity-overline">
+          {isVVIP ? "EXCLUSIVE DEVELOPMENT" : "ENGINEERING IDENTITY"}
+        </span>
+
+        <span className="eng-identity-title">
+          {isCEO
+            ? "CEO EXECUTIVE"
+            : isAerospace
+              ? "AEROSPACE DIVISION"
+              : "VVIP DEVELOPMENT"}
+        </span>
+
+        <span className="eng-identity-description">
+          {isCEO
+            ? "Executive leadership · Strategic vision"
+            : isAerospace
+              ? "Flight systems · Advanced engineering"
+              : "Exclusive identity · Private designation"}
+        </span>
+      </div>
+
+      <span className="eng-identity-status">
+        {isVVIP ? "VVIP" : isCEO ? "EXECUTIVE" : "AEROSPACE"}
+      </span>
+    </div>
+  );
+}
+
+function formatUSD(value: number): string {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
     maximumFractionDigits: 0,
   }).format(value);
 }
+
 
 export default function Home() {
   const [authLoading, setAuthLoading] = useState(true);
@@ -122,81 +324,23 @@ export default function Home() {
   const [newCategory, setNewCategory] =
     useState<Project["category"]>("Innovation");
 
-  // AUTHENTICATION AND PROFILE
-  useEffect(() => {
-    const supabase = createClient();
-    let mounted = true;
+  // AUTHENTICATION, PROFILE, AND PROJECTS
+useEffect(() => {
+  const supabase = createClient();
+  let mounted = true;
 
-    async function loadCurrentUser() {
-      try {
-        const {
-          data: { user },
-          error: authError,
-        } = await supabase.auth.getUser();
+  async function loadCurrentUser() {
+    setAuthLoading(true);
 
-        if (!mounted) return;
+    try {
+      const {
+        data: { user },
+        error: authError,
+      } = await supabase.auth.getUser();
 
-        if (authError || !user) {
-          setUserId(null);
-          setUserEmail(null);
-          setProfileName("Guest");
-          setProfileHeadline("");
-          setProfileBio("");
-          setProfileSector("Not specified");
-          setProfileType("Individual");
-          setNewAuthor("");
-          setAuthLoading(false);
-          return;
-        }
+      if (!mounted) return;
 
-        setUserId(user.id);
-        setUserEmail(user.email ?? null);
-
-        const { data, error: profileError } = await supabase
-          .from("profiles")
-          .select("full_name, headline, account_type")
-          .eq("id", user.id)
-          .maybeSingle();
-
-        if (!mounted) return;
-
-        if (profileError) {
-          console.error(
-            "Failed to load profile:",
-            profileError.message
-          );
-        }
-
-        const profile = data as DatabaseProfile | null;
-
-        const metadataName =
-          user.user_metadata?.full_name ||
-          user.user_metadata?.name ||
-          "";
-
-        const accountName =
-          profile?.full_name?.trim() ||
-          metadataName.trim() ||
-          user.email?.split("@")[0] ||
-          "User";
-
-        setProfileName(accountName);
-        setNewAuthor(accountName);
-
-        setProfileHeadline(profile?.headline || "");
-
-        setProfileType(
-          profile?.account_type === "Company"
-            ? "Company"
-            : "Individual"
-        );
-
-        setAuthLoading(false);
-      } catch (error) {
-        console.error("Authentication check failed:", error);
-
-        if (!mounted) return;
-
+      if (authError || !user) {
         setUserId(null);
         setUserEmail(null);
         setProfileName("Guest");
@@ -205,23 +349,116 @@ export default function Home() {
         setProfileSector("Not specified");
         setProfileType("Individual");
         setNewAuthor("");
+        setProjectList(initialProjects);
         setAuthLoading(false);
+        return;
       }
+
+      setUserId(user.id);
+      setUserEmail(user.email ?? null);
+
+      const { data: profileData, error: profileError } =
+        await supabase
+          .from("profiles")
+          .select("full_name, headline, account_type")
+          .eq("id", user.id)
+          .maybeSingle();
+
+      if (!mounted) return;
+
+      if (profileError) {
+        console.error("Failed to load profile:", profileError.message);
+      }
+
+      const profile = profileData as DatabaseProfile | null;
+
+      const metadataName =
+        user.user_metadata?.full_name ||
+        user.user_metadata?.name ||
+        "";
+
+      const accountName =
+        profile?.full_name?.trim() ||
+        metadataName.trim() ||
+        user.email?.split("@")[0] ||
+        "User";
+
+      setProfileName(accountName);
+      setNewAuthor(accountName);
+      setProfileHeadline(profile?.headline || "");
+
+      setProfileType(
+        profile?.account_type === "Company"
+          ? "Company"
+          : "Individual"
+      );
+
+      // Load projects from Supabase, linked to the account ID.
+      const { data: projectData, error: projectError } =
+  await supabase
+    .from("projects")
+    .select(
+      "id, user_id, title, author, sector, description, value, valuation_status, category, likes"
+    )
+    .order("created_at", { ascending: false });
+
+if (!mounted) return;
+
+if (projectError) {
+  console.error(
+    "Failed to load projects:",
+    projectError.message
+  );
+
+  alert(
+    "Proyek gagal dimuat dari database. Periksa tabel projects dan kebijakan RLS."
+  );
+} else {
+  const databaseProjects: Project[] = (projectData ?? []).map(
+    (row) => ({
+      id: Number(row.id),
+      user_id: row.user_id,
+      title: row.title,
+      author: row.author,
+      sector: row.sector,
+      description: row.description,
+      value: Number(row.value),
+      valuationStatus: row.valuation_status as ValuationStatus,
+      category: row.category as Project["category"],
+      likes: row.likes,
+    })
+  );
+
+  setProjectList(databaseProjects);
+}
+
+setAuthLoading(false);
+    } catch (error) {
+      console.error("Failed to load account:", error);
+
+      if (!mounted) return;
+
+      setUserId(null);
+      setUserEmail(null);
+      setProfileName("Guest");
+      setProjectList(initialProjects);
+      setAuthLoading(false);
     }
+  }
 
+  void loadCurrentUser();
+
+  const {
+    data: { subscription },
+  } = supabase.auth.onAuthStateChange(() => {
     void loadCurrentUser();
+  });
 
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange(() => {
-      void loadCurrentUser();
-    });
-
-    return () => {
-      mounted = false;
-      subscription.unsubscribe();
-    };
-  }, []);
+  return () => {
+    mounted = false;
+    subscription.unsubscribe();
+  };
+}, []);
 
   const isLoggedIn = Boolean(userId);
 
@@ -246,14 +483,13 @@ export default function Home() {
 
   // PROFILE PROJECTS
   const profileProjects = useMemo(() => {
-    if (!isLoggedIn) return [];
+  if (!userId) return [];
 
-    return projectList.filter(
-      (project) =>
-        project.author.trim().toLowerCase() ===
-        profileName.trim().toLowerCase()
-    );
-  }, [projectList, profileName, isLoggedIn]);
+  return projectList.filter(
+    (project) =>
+      (project as Project & { user_id?: string }).user_id === userId
+  );
+}, [projectList, userId]);
 
   const portfolioValue = profileProjects.reduce(
     (total, project) => total + project.value,
@@ -328,10 +564,46 @@ export default function Home() {
         return;
       }
 
-      setProfileName(profileName.trim());
-      setNewAuthor(profileName.trim());
-      setShowProfile(false);
-      setProfileMessage("");
+      const updatedName = profileName.trim();
+
+setProfileName(updatedName);
+setNewAuthor(updatedName);
+
+// Update the displayed author name for this account's projects.
+setProjectList((previousProjects) =>
+  previousProjects.map((project) =>
+    project.user_id === user.id
+      ? { ...project, author: updatedName }
+      : project
+  )
+);
+const { error: projectUpdateError } = await supabase
+  .from("projects")
+  .update({ author: updatedName })
+  .eq("user_id", user.id);
+
+if (projectUpdateError) {
+  console.error(
+    "Failed to update project author names:",
+    projectUpdateError.message
+  );
+
+  alert(
+    "Nama profil tersimpan, tetapi nama pembuat proyek gagal diperbarui."
+  );
+} else {
+  setProjectList((previousProjects) =>
+    previousProjects.map((project) =>
+      project.user_id === user.id
+        ? { ...project, author: updatedName }
+        : project
+    )
+  );
+}
+
+
+setShowProfile(false);
+setProfileMessage("");
 
       alert(
         "Profil berhasil disimpan. Nama, headline, dan tipe akun telah diperbarui."
@@ -346,55 +618,101 @@ export default function Home() {
     }
   }
 
-  // PUBLISH PROJECT
-  function publishProject(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  
+// PUBLISH PROJECT TO SUPABASE
+async function publishProject(
+  event: FormEvent<HTMLFormElement>
+) {
+  event.preventDefault();
 
-    if (!requireLogin()) return;
+  if (!requireLogin() || !userId) return;
 
-    const parsedValue = Number(newValue);
+  const title = newTitle.trim();
+  const description = newDescription.trim();
+  const parsedValue = Number(newValue);
 
-    if (
-      !newTitle.trim() ||
-      !newDescription.trim() ||
-      !Number.isFinite(parsedValue) ||
-      parsedValue < 0
-    ) {
-      alert("Periksa kembali data proyek yang kamu masukkan.");
-      return;
-    }
-
-    const newProject: Project = {
-      id: Date.now(),
-      title: newTitle.trim(),
-      author: profileName,
-      sector: newSector,
-      description: newDescription.trim(),
-      value: parsedValue,
-      valuationStatus: newStatus,
-      category: newCategory,
-      likes: 0,
-    };
-
-    setProjectList((previousProjects) => [
-      newProject,
-      ...previousProjects,
-    ]);
-
-    setNewTitle("");
-    setNewAuthor(profileName);
-    setNewSector(sectors[0].name);
-    setNewDescription("");
-    setNewValue("1000");
-    setNewStatus("Creator-Declared");
-    setNewCategory("Innovation");
-    setSearch("");
-    setShowForm(false);
-
-    alert(
-      "Proyek ditambahkan ke daftar demonstrasi halaman ini. Penyimpanan proyek ke database belum diimplementasikan."
-    );
+  if (
+    !title ||
+    !description ||
+    !Number.isFinite(parsedValue) ||
+    parsedValue < 0
+  ) {
+    alert("Periksa kembali data proyek yang kamu masukkan.");
+    return;
   }
+
+  const supabase = createClient();
+
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
+
+  if (authError || !user || user.id !== userId) {
+    alert("Sesi akun tidak valid. Silakan login kembali.");
+    return;
+  }
+
+  const newProject = {
+    user_id: user.id,
+    title,
+    author: profileName.trim(),
+    sector: newSector,
+    description,
+    value: parsedValue,
+    valuation_status: newStatus,
+    category: newCategory,
+    likes: 0,
+  };
+
+  const { data, error } = await supabase
+    .from("projects")
+    .insert(newProject)
+    .select(
+      "id, user_id, title, author, sector, description, value, valuation_status, category, likes"
+    )
+    .single();
+
+  if (error) {
+    console.error("Project publish error:", error.message);
+    alert(`Gagal menyimpan proyek: ${error.message}`);
+    return;
+  }
+
+  const savedProject: Project = {
+    id: Number(data.id),
+    user_id: data.user_id,
+    title: data.title,
+    author: data.author,
+    sector: data.sector,
+    description: data.description,
+    value: Number(data.value),
+    valuationStatus: data.valuation_status as ValuationStatus,
+    category: data.category as Project["category"],
+    likes: data.likes,
+  };
+
+  setProjectList((previousProjects) => [
+    savedProject,
+    ...previousProjects.filter(
+      (project) => project.user_id !== undefined
+    ),
+  ]);
+
+  setNewTitle("");
+  setNewAuthor(profileName);
+  setNewSector(sectors[0].name);
+  setNewDescription("");
+  setNewValue("1000");
+  setNewStatus("Creator-Declared");
+  setNewCategory("Innovation");
+  setSearch("");
+  setShowForm(false);
+
+  alert("Proyek berhasil disimpan ke database ENGRAPH.");
+}
+
+
 
   // SIGN OUT
   async function handleSignOut() {
@@ -652,24 +970,116 @@ export default function Home() {
                 </label>
 
                 <select
-                  value={profileSector}
-                  onChange={(event) =>
-                    setProfileSector(event.target.value)
-                  }
-                  className="w-full rounded-lg border border-white/10 bg-[#111722] px-4 py-3 text-sm outline-none focus:border-cyan-400"
-                >
-                  <option value="Not specified">Not specified</option>
+  value={profileSector}
+  onChange={(e) => setProfileSector(e.target.value)}
+  className="..."
+>
+  {sectors.map((sector) => (
+    <option key={sector.name} value={sector.name}>
+      {sector.name}
+    </option>
+  ))}
 
-                  {sectors.map((sector) => (
-                    <option key={sector.name} value={sector.name}>
-                      {sector.name}
-                    </option>
-                  ))}
-                </select>
+  <option value="CEO Executive">
+    CEO Executive
+  </option>
+</select>
 
                 <p className="mt-2 text-xs text-gray-500">
-                  Sector belum disimpan ke tabel profiles.
-                </p>
+  Pilih bidang engineering atau jabatan profesionalmu.
+</p>
+
+{/* CEO EXECUTIVE BADGE */}
+{profileSector === "CEO Executive" && (
+  <div className="ceo-identity">
+    <div className="ceo-lion-frame">
+      <svg
+        className="ceo-lion-icon"
+        viewBox="0 0 100 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-label="Geometric lion emblem"
+        role="img"
+      >
+        <defs>
+          <linearGradient
+            id="lionGold"
+            x1="10"
+            y1="5"
+            x2="90"
+            y2="95"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stopColor="#FFF3B0" />
+            <stop offset=".45" stopColor="#D6A84F" />
+            <stop offset="1" stopColor="#8B6426" />
+          </linearGradient>
+        </defs>
+
+        {/* Geometric lion mane */}
+        <path
+          d="M50 5 L68 14 L86 13 L83 32 L95 47 L82 61 L78 82 L60 83 L50 96 L40 83 L22 82 L18 61 L5 47 L17 32 L14 13 L32 14 Z"
+          stroke="url(#lionGold)"
+          strokeWidth="2.5"
+          strokeLinejoin="round"
+        />
+
+        {/* Lion face */}
+        <path
+          d="M31 30 L42 24 L50 29 L58 24 L69 30 L66 52 L59 67 L50 74 L41 67 L34 52 Z"
+          stroke="url(#lionGold)"
+          strokeWidth="2.5"
+          strokeLinejoin="round"
+        />
+
+        {/* Eyes */}
+        <path
+          d="M35 43 L45 46 M65 43 L55 46"
+          stroke="url(#lionGold)"
+          strokeWidth="3"
+          strokeLinecap="round"
+        />
+
+        {/* Nose and muzzle */}
+        <path
+          d="M44 53 L50 58 L56 53 M50 58 L50 65 M50 65 L43 62 M50 65 L57 62"
+          stroke="url(#lionGold)"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+
+        {/* Forehead detail */}
+        <path
+          d="M42 35 L50 31 L58 35"
+          stroke="url(#lionGold)"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+      </svg>
+    </div>
+
+    <div className="ceo-identity-copy">
+      <span className="ceo-identity-eyebrow">
+        EXECUTIVE IDENTITY
+      </span>
+
+      <span className="badge-shimmer badge-gold">
+        ✦ CEO EXECUTIVE
+      </span>
+    </div>
+  </div>
+)}
+
+{/* VVIP DEVELOPMENT BADGE */}
+{userEmail?.trim().toLowerCase() ===
+  "delphianandrahartanto@gmail.com" && (
+  <div className="mt-4">
+    <span className="badge-shimmer badge-silver">
+      ◆ VVIP DEVELOPMENT
+    </span>
+  </div>
+)}
               </div>
 
               <div className="md:col-span-2">
@@ -713,8 +1123,9 @@ export default function Home() {
 
               <div className="md:col-span-2">
                 <div className="mb-4 rounded-lg border border-white/10 bg-black/20 p-4">
-                  <p className="text-sm text-gray-400">
-                    Current Portfolio Value
+                  <p className="mt-2 text-xs leading-5 text-gray-500">
+                     Calculated from projects registered to this account.
+                     This is not personal income or company valuation.
                   </p>
 
                   <p className="mt-2 text-3xl font-bold text-cyan-300">
@@ -956,9 +1367,22 @@ export default function Home() {
                       : "Explore ENGRAPH without signing in")}
                 </p>
 
-                <p className="mt-3 text-xs text-gray-500">
-                  {profileType} · {profileSector}
-                </p>
+                
+
+<div className="mt-3 flex flex-wrap gap-2">
+  {profileSector === "CEO Executive" && (
+    <span className="badge-shimmer badge-gold">
+      ✦ CEO EXECUTIVE
+    </span>
+  )}
+
+  {userEmail?.trim().toLowerCase() ===
+    "delphianandrahartanto@gmail.com" && (
+    <span className="badge-shimmer badge-silver">
+      ◆ VVIP DEVELOPMENT
+    </span>
+  )}
+</div>
 
                 {isLoggedIn && userEmail && (
                   <p className="mt-2 text-xs text-gray-500">
@@ -977,7 +1401,7 @@ export default function Home() {
                 </p>
 
                 <p className="mt-1 text-xs text-gray-500">
-                  {profileProjects.length} matching demo projects
+                  {profileProjects.length} registered projects
                 </p>
               </div>
             </div>
@@ -1156,10 +1580,9 @@ export default function Home() {
                 </h4>
 
                 <p className="text-sm text-gray-400">
-                  Publishing currently adds the project to the local
-                  demonstration list. Database publishing has not yet
-                  been implemented.
-                </p>
+                    Published projects are stored in the ENGRAPH database
+                    and linked to your account.
+              </p>
 
                 <div>
                   <label className="mb-2 block text-sm text-gray-300">
